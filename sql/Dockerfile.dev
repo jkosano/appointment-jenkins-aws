@@ -1,0 +1,9 @@
+FROM mysql
+# ENV MYSQL_ROOT_PASSWORD MYSQL_ROOT_PASSWORD
+# ENV MYSQL_DATABASE appointment-flask
+ENV MYSQL_DATABASE appointment
+#create db
+# RUN mkdir /usr/sql
+# RUN chmod 644 /usr/sql
+COPY appointment-2.sql  ./docker-entrypoint-initdb.d
+# ADD ["../appointment-2.sql", "/usr/sql/appointment-2.sql"]

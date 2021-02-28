@@ -1,0 +1,52 @@
+pipeline {
+    agent any 
+
+    // environment {
+    //     // DOCKER_ID=credentials('DOCKER_ID')
+    //     // DOCKER_PASSWORD=credentials('DOCKER_PASSWORD')
+    // }
+
+    environment {
+        dockerImage = ''
+        //import 
+        registry = 'jpk912/appointment2'
+        //import docker hub credentials
+        registryCredential = 'DOCKER_ID'
+    }
+
+    stages {
+
+        // stage("Checkout"){
+            checkout scm
+        // }
+
+        stage("Clone Repo"){
+            steps{
+                sh '''
+                    cd /var/jenkins_home/workspace/
+                '''
+                git 'https://github.com/jkosano/appointment2-jenkins.git'
+            }
+        }
+
+        stage('Build') { 
+            steps {
+                script {
+                    // dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    docker build -t registry -f /nginx
+                }
+            }
+        }
+
+        stage('Push Image'){
+            steps{
+                script{
+                    docker.withRegistry( '', registryCredential ){
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+
+    }
+}
