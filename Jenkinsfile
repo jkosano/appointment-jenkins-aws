@@ -27,7 +27,7 @@ node {
        }     
       stage('Test image') {           
             sh '''
-                echo "Tests would go here...."
+                echo "Tests would go here dfjiaj...."
             '''  
         }     
        stage('Push image') {
