@@ -7,9 +7,9 @@ node {
         //import docker hub credentials
         //REGISTRY_CREDENTIAL = credentials('DOCKER_ID')
     }
-      def app     
+      //def app     
       stage('Clone repository') {               
-             
+            
             checkout scm
       }     
       stage('Build image') {    
