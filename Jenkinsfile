@@ -32,10 +32,10 @@ node {
         }     
        stage('Push image') {
            //login and push to registry. DOCKER_ID is the jenkins credentials created. No need to import into jenkinsfiles
-            docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_ID') {            
-                website.push("${env.BUILD_NUMBER}")            
-                sqldb.push("${env.BUILD_NUMBER}")            
-                //website.push("latest")        
-            }    
+            // docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_ID') {            
+            //     website.push("${env.BUILD_NUMBER}")            
+            //     sqldb.push("${env.BUILD_NUMBER}")            
+            //     //website.push("latest")        
+            // }    
         }
 }
