@@ -19,10 +19,10 @@ node {
             '''
             website = docker.build("jpk912/appointment2-jenkins-apache", "-f nginx/Dockerfile .")
 
-            sh ''' #!/bin/bash
-                echo "Building sql...."
-            '''
-            sqldb = docker.build("jpk912/appointment2-jenkins-sqldb", "-f sql/Dockerfile .")
+            // sh ''' #!/bin/bash
+            //     echo "Building sql...."
+            // '''
+            //sqldb = docker.build("jpk912/appointment2-jenkins-sqldb", "-f sql/Dockerfile .")
 
        }     
       stage('Test image') {           
