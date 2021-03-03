@@ -263,9 +263,10 @@ class Cursor(object):
                                             for index, arg in enumerate(args)))
             self.nextset()
 
-        q = "CALL %s(%s)" % (procname,
-                             ','.join(['@_%s_%d' % (procname, i)
-                                       for i in range_type(len(args))]))
+        q = "CALL %s(%s)" % (
+            procname,
+            ','.join('@_%s_%d' % (procname, i) for i in range_type(len(args))),
+        )
         self._query(q)
         self._executed = q
         return args
@@ -294,10 +295,7 @@ class Cursor(object):
         self._check_executed()
         if self._rows is None:
             return ()
-        if self.rownumber:
-            result = self._rows[self.rownumber:]
-        else:
-            result = self._rows
+        result = self._rows[self.rownumber:] if self.rownumber else self._rows
         self.rownumber = len(self._rows)
         return result
 
@@ -469,7 +467,7 @@ class SSCursor(Cursor):
             size = self.arraysize
 
         rows = []
-        for i in range_type(size):
+        for _ in range_type(size):
             row = self.read_next()
             if row is None:
                 break
